@@ -1,6 +1,6 @@
 {
   "type": "panel",
-  "name": "fan-panel",
+  "name": "Fan",
   "id": "peterholmberg-fan-panel",
   "info": {
     "description": "Fan panel plugin to visualize fan speeds",

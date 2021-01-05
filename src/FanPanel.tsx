@@ -10,25 +10,26 @@ export const FanPanel: FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles(width, height);
   return (
     <div className={styles.panelWrapper}>
-    <div className={styles.fanContainer}>
-      <div className={styles.left} />
-      <div className={styles.right} />
-      <div className={styles.top} />
-      <div className={styles.bottom} />
-    </div>
+      <div className={styles.fanContainer}>
+        <div className={styles.left} />
+        <div className={styles.right} />
+        <div className={styles.top} />
+        <div className={styles.bottom} />
+      </div>
     </div>
   );
 };
 
 const getStyles = stylesFactory((width: number, height: number) => {
+  const size = width < height ? width : height;
   const spin = keyframes`
-    0%{
-      transform: rotate(0deg);
-    }
-    100%{
-      transform: rotate(360deg);
-    }
-`;
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    `;
 
   const fan = css`
     display: block;
@@ -36,6 +37,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
     border-radius: 5px;
     position: absolute;
     box-shadow: inset 1px 1px 40px #555;
+
     &:after {
       content: '';
       position: absolute;
@@ -50,6 +52,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
     top: 50%;
     margin-top: -25px;
     transform: skewX(20deg);
+
     &:after {
       top: 25%;
       width: 15px;
@@ -63,6 +66,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
     left: 50%;
     margin-left: -25px;
     transform: skewY(20deg);
+
     &:after {
       height: 15px;
       width: 50%;
@@ -72,31 +76,33 @@ const getStyles = stylesFactory((width: number, height: number) => {
 
   return {
     panelWrapper: css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
     `,
     fanContainer: css`
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      position: relative;
-      display: inline-block;
-      animation: ${spin} 1s linear infinite;
+          width: ${size}px;
+          height: ${size}px;
+          border-radius: 50%;
+          position: relative;
+          display: inline-block;
+          animation: ${spin} 1s linear infinite;
 
-      &:after{
-        content:"";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        border-radius: 50%;
-        width: 70px;
-        height: 70px;
-        margin-left: -35px;
-        margin-top: -35px;
-        background: #444;
-        box-shadow: inset 0 0 0 8px #444444, inset 0 1px 5px 22px #383838;
-  `,
+          &:after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            margin-left: -35px;
+            margin-top: -35px;
+            background: #444;
+            box-shadow: inset 0 0 0 8px #444444, inset 0 1px 5px 22px #383838;
+        `,
     left: cx(
       fan,
       horizontal,
@@ -106,6 +112,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
         margin-right: 45px;
         // border-radius: 14px 5px 5px 40px;
         border-radius: 50% 15px 15px 50%;
+
         &:after {
           left: 100%;
         }
@@ -120,6 +127,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
         margin-left: 45px;
         // border-radius: 5px 40px 14px 5px;
         border-radius: 15px 50% 50% 15px;
+
         &:after {
           right: 100%;
         }
@@ -134,6 +142,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
         margin-bottom: 45px;
         // border-radius: 40px 14px 5px 5px;
         border-radius: 50% 50% 15px 15px;
+
         &:after {
           top: 100%;
         }
@@ -148,6 +157,7 @@ const getStyles = stylesFactory((width: number, height: number) => {
         margin-top: 45px;
         // border-radius: 5px 5px 40px 14px;
         border-radius: 15px 15px 50% 50%;
+
         &:after {
           bottom: 100%;
         }
