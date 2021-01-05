@@ -1,40 +1,45 @@
 import { PanelPlugin } from '@grafana/data';
-import { SimpleOptions } from './types';
 import { FanPanel } from './FanPanel';
+import { FanOptions } from './types';
 
-export const plugin = new PanelPlugin<SimpleOptions>(FanPanel).setPanelOptions(builder =>
-  builder
-    .addTextInput({
-      path: 'text',
-      name: 'Simple text option',
-      description: 'Description of panel option',
-      defaultValue: 'Default value of text input option',
-    })
-    .addBooleanSwitch({
-      path: 'showSeriesCount',
-      name: 'Show series counter',
-      defaultValue: false,
-    })
-    .addRadio({
-      path: 'seriesCountSize',
-      defaultValue: 'sm',
-      name: 'Series counter size',
-      settings: {
-        options: [
-          {
-            value: 'sm',
-            label: 'Small',
-          },
-          {
-            value: 'md',
-            label: 'Medium',
-          },
-          {
-            value: 'lg',
-            label: 'Large',
-          },
-        ],
-      },
-      showIf: config => config.showSeriesCount,
-    })
-);
+export const plugin = new PanelPlugin<FanOptions>(FanPanel)
+  .setPanelOptions(builder =>
+    builder
+      .addNumberInput({
+        path: 'maxSpeed',
+        name: 'Fan max speed',
+        defaultValue: 1200,
+      })
+      .addNumberInput({
+        path: 'minSpeed',
+        name: 'Fan min speed',
+        defaultValue: 0,
+      })
+      .addSelect({
+        path: 'colorMode',
+        name: 'Color mode',
+        settings: {
+          options: [
+            {
+              value: 'thresholds',
+              label: 'From thresholds',
+            },
+            {
+              value: 'speed',
+              label: 'From speed',
+            },
+            {
+              value: 'fixed',
+              label: 'Fixed color',
+            },
+          ],
+        },
+        defaultValue: 'fixed',
+      })
+      .addColorPicker({
+        path: 'color',
+        name: 'Color',
+        showIf: currentConfig => currentConfig.colorMode === 'fixed',
+      })
+  )
+  .setNoPadding();

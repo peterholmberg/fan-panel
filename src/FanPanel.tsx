@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { css, cx, keyframes } from 'emotion';
 import { PanelProps } from '@grafana/data';
 import { stylesFactory } from '@grafana/ui';
-import { SimpleOptions } from 'types';
+import { FanOptions } from 'types';
 
-interface Props extends PanelProps<SimpleOptions> {}
+interface Props extends PanelProps<FanOptions> {}
 
 export const FanPanel: FC<Props> = ({ options, data, width, height }) => {
   const styles = getStyles(width, height);

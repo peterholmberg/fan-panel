@@ -1,7 +1,8 @@
-type SeriesSize = 'sm' | 'md' | 'lg';
+export type ColorMode = 'thresholds   ' | 'speedd' | 'fixed';
 
-export interface SimpleOptions {
-  text: string;
-  showSeriesCount: boolean;
-  seriesCountSize: SeriesSize;
+export interface FanOptions {
+  colorMode: ColorMode;
+  maxSpeed: number;
+  minSpeed: number;
+  color: string;
 }
