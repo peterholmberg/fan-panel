@@ -3,6 +3,7 @@ import { FanPanel } from './FanPanel';
 import { FanOptions } from './types';
 
 export const plugin = new PanelPlugin<FanOptions>(FanPanel)
+  .useFieldConfig()
   .setPanelOptions(builder =>
     builder
       .addNumberInput({
@@ -14,32 +15,6 @@ export const plugin = new PanelPlugin<FanOptions>(FanPanel)
         path: 'minSpeed',
         name: 'Fan min speed',
         defaultValue: 0,
-      })
-      .addSelect({
-        path: 'colorMode',
-        name: 'Color mode',
-        settings: {
-          options: [
-            {
-              value: 'thresholds',
-              label: 'From thresholds',
-            },
-            {
-              value: 'speed',
-              label: 'From speed',
-            },
-            {
-              value: 'fixed',
-              label: 'Fixed color',
-            },
-          ],
-        },
-        defaultValue: 'fixed',
-      })
-      .addColorPicker({
-        path: 'color',
-        name: 'Color',
-        showIf: currentConfig => currentConfig.colorMode === 'fixed',
       })
   )
   .setNoPadding();

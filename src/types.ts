@@ -1,4 +1,4 @@
-export type ColorMode = 'thresholds   ' | 'speedd' | 'fixed';
+export type ColorMode = 'thresholds   ' | 'speed' | 'fixed';
 
 export interface FanOptions {
   colorMode: ColorMode;
